@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<NuGetAuditMode>all</NuGetAuditMode>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<WarningLevel>9999</WarningLevel>
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<WarningLevel>9999</WarningLevel>
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="pythonnet"
+											Version="3.0.5"
+											PrivateAssets="all">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="System.Management.Automation"
+											Version="7.5.0"
+											PrivateAssets="all">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="TestYtDlp\TestYtDlp.psd1">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<Target Name="PostBuild"
+					AfterTargets="PostBuildEvent">
+		<Exec Command="pwsh -NoLogo -ExecutionPolicy RemoteSigned -command &quot;&amp; {. ./Post-Build.ps1 $(ProjectName) $(OutDir) $(ProjectDir) }&quot;" />
+	</Target>
+
+</Project>
