@@ -3,7 +3,7 @@
     "Debug": {
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
-      "commandLineArgs": "-NoExit -File \"$(ProjectDir)\\Start-Debug.ps1\""
+      "commandLineArgs": "-NoExit -command \"& {. $(ProjectDir)\\Start-Debug.ps1 -ProjectName $(ProjectName)}\""
     }
   }
 }

@@ -9,7 +9,7 @@ public class TestYtDlp : System.Management.Automation.Cmdlet
 {
 	public TestYtDlp()
 	{
-		Runtime.PythonDLL = "python37.dll";
+		Runtime.PythonDLL = "python310.dll";
 
 		PythonEngine.Initialize();
 		PythonEngine.BeginAllowThreads();
